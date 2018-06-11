@@ -1,6 +1,6 @@
 {
   "name": "file-to-sumo",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "stream logs from a file to sumologic hosted collector",
   "main": "lib/service/logcontroller.js",
   "scripts": {
