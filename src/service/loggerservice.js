@@ -34,7 +34,7 @@ class LoggerService {
         log["timestamp"] = new Date().toISOString();
         log["error"] = err;
         log["opts"] = opts;
-        return log + "\r\n";
+        return JSON.stringify(log) + "\r\n";
     }
 }
 
