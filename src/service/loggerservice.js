@@ -1,7 +1,5 @@
 const SumoLogger = require("sumo-logger"),
-    uuidv4 = require("uuid/v4"),
-    logger = require("../../../config/logger.json"),
-    credentials = require("../../../config/credentials.json");
+    uuidv4 = require("uuid/v4");   
 
 class LoggerService {
     constructor(opts) {
@@ -17,8 +15,8 @@ class LoggerService {
         opts["sessionKey"] = uuidv4(); 
         opts["onSuccess"] = () => {};
         opts["onError"] = (err) => {            
-            console.log("Sumo Logic error callback executed");
-            throw new Error("Sumo Logic error callback executed");
+            console.log("Error in Sumo Logic");
+            throw new Error("Error in Sumo Logic");
         };
         return opts;
     }

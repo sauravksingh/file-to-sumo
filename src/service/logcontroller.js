@@ -30,7 +30,7 @@ class LogController {
 
     validateConfig(config) {
         if (!config || !config.endpoint || !config.logfile) {
-            throw new Error("Invalid/Incomplete configuration.");
+            throw new Error("Invalid/Incomplete configuration");
         }
         return true;
     }
