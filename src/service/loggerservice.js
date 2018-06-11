@@ -1,4 +1,5 @@
-const SumoLogger = require("sumo-logger"),
+const fs = require("fs"),
+    SumoLogger = require("sumo-logger"),
     uuidv4 = require("uuid/v4");   
 
 class LoggerService {
@@ -14,9 +15,8 @@ class LoggerService {
     initOptions(opts) {    
         opts["sessionKey"] = uuidv4(); 
         opts["onSuccess"] = () => {};
-        opts["onError"] = (err) => {            
-            console.log("Error in Sumo Logic");
-            throw new Error("Error in Sumo Logic");
+        opts["onError"] = (err) => {      
+            fs.appendFile("./loggingfailures.log",  err, 'utf8');
         };
         return opts;
     }
