@@ -1,6 +1,6 @@
 {
   "name": "file-to-sumo",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "stream logs from a file to sumologic hosted collector",
   "main": "lib/service/logcontroller.js",
   "scripts": {
@@ -25,6 +25,16 @@
     "babel-preset-env": "^1.7.0"
   },
   "keywords": [
-    "sumologic", "js-sdk", "jslogger", "sumologiclogs", "javascript", "filelogs", "sumo", "cimpress", "dninjas", "collector", "hosted"
+    "sumologic",
+    "js-sdk",
+    "jslogger",
+    "sumologiclogs",
+    "javascript",
+    "filelogs",
+    "sumo",
+    "cimpress",
+    "dninjas",
+    "collector",
+    "hosted"
   ]
 }
