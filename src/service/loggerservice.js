@@ -38,6 +38,10 @@ class LoggerService {
         this.sumoLogger.log(message)
     };
 
+    flushLogs(){
+        this.sumoLogger.flushLogs();
+    }
+
     prepareErrorLog(err, opts) {
         let log = {};
         log["timestamp"] = new Date().toISOString();

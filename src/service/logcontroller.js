@@ -2,6 +2,7 @@ const path = require("path"),
     Tail = require("node.tail");
 
 const LoggerService = require("./loggerservice.js");
+let loggerService;
 
 class LogController {
     constructor() {
@@ -13,7 +14,7 @@ class LogController {
 
     streamLogs(config) {
         this.validateConfig(config);
-        const loggerService = new LoggerService(config);
+        loggerService = new LoggerService(config);
         const absolutePath = path.resolve(config.logFilePath);
         const tailFile = new Tail(absolutePath, {
             buffer: config.memoryBufferInBytes || 63 * 1024 - 1,
@@ -27,6 +28,12 @@ class LogController {
         });
         tailFile.on('error', console.error);
     };
+
+    flushLogs(){
+        if(loggerService instanceof LoggerService){
+            loggerService.flushLogs();
+        }
+    }
 
     validateConfig(config) {
         if (!config || !config.sumoEndpoint || !config.logFilePath) {
