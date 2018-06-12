@@ -48,6 +48,7 @@ $ npm install --save file-to-sumo
 ### Core function
 
 * `streamLogs`: Set the configuration for streaming logs and starts streaming logs to configured [Sumo Logic](http://www.sumologic.com) collector
+* `flushLogs` : Flush the remaining logs in the log buffer typically before finishing the session/shutdown
 
 ### Configuration
 
