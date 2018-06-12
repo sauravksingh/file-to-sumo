@@ -1,5 +1,5 @@
 # file-to-sumo
-###Stream logs from a file to SumoLogic hosted collector
+### Stream logs from a file to SumoLogic hosted collector
 ------
 
 The file-to-sumo library is a lightweight logging tool to tail/follow on a log file in real-time and forward custom log messages to [Sumo Logic](http://www.sumologic.com) hosted collector over HTTP. 
@@ -15,7 +15,6 @@ Messages are batched and sent at the configured interval; default is zero, meani
 * [Usage](#usage)
     * [Configuration](#configuration)  
 * [Usage Examples](#usage-examples)
-* [Credits](#credits)
 * [License](#license)
 
 ## Installation
@@ -44,7 +43,7 @@ $ npm install --save file-to-sumo
 * Download or clone this repo.
 * Copy the folder named `lib` with files `service/logcontroller.js` and `service/loggerservice.js`   
 
-##Usage
+## Usage
 
 ### Core function
 
@@ -105,7 +104,7 @@ This value sets whether the log file should be tailed\followed in real-time. The
 
 This value sets the polling interval for tail\follow. The default value is `500`
 
-##Usage Examples
+## Usage Examples
 
 **Full configuration:**
 
@@ -125,3 +124,22 @@ This value sets the polling interval for tail\follow. The default value is `500`
         "sleepIntervalInMilliSeconds": 500
     };
 ```
+
+**Node.js:**
+
+***Logging***
+```javascript
+const fileToSumo = require("file-to-sumo");
+const opts =  {
+        "logFilePath" : "./your_service.log",
+        "sumoEndpoint": "https://endpoint1.collection.us2.sumologic.com/receiver/v1/your_sumo_endpoint",
+        "sumoClientUrl": "https://your_service.com"
+        //Other options ......
+};
+
+fileToSumo.streamLogs(opts);
+
+```
+
+## License
+Apache Software License, Version 2.0. Please visit <http://www.apache.org/licenses/LICENSE-2.0.txt> for details.
