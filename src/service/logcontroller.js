@@ -14,23 +14,23 @@ class LogController {
     streamLogs(config) {
         this.validateConfig(config);
         const loggerService = new LoggerService(config);
-        const absolutePath = path.resolve(config.logfile);
+        const absolutePath = path.resolve(config.logFilePath);
         const tailFile = new Tail(absolutePath, {
-            buffer: config.memorybuffer || 63 * 1024 - 1,
-            sep: config.separator || '\n',            
-            lines: config.linebuffer || 20,
+            buffer: config.memoryBufferInBytes || 63 * 1024 - 1,
+            sep: config.logSeparator || '\n',            
+            lines: config.lineBuffer || 100,
             follow: config.follow || true,
-            sleep: config.sleep || 500
+            sleep: config.sleepIntervalInMilliSeconds || 500
         });
-        tailFile.on("line", (line) => {
+        tailFile.on("line", (line) => {         
             loggerService.log(line);
         });
         tailFile.on('error', console.error);
     };
 
     validateConfig(config) {
-        if (!config || !config.endpoint || !config.logfile) {
-            throw new Error("Invalid/Incomplete configuration");
+        if (!config || !config.sumoEndpoint || !config.logFilePath) {
+            throw new Error("Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath");
         }
         return true;
     }
