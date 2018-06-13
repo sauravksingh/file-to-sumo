@@ -1,7 +1,7 @@
-const path = require("path"),
-    Tail = require("node.tail");
+const path = require('path'),
+    Tail = require('node.tail');
 
-const LoggerService = require("./loggerservice.js");
+const LoggerService = require('./loggerservice.js');
 let loggerService;
 
 class LogController {
@@ -18,26 +18,26 @@ class LogController {
         const absolutePath = path.resolve(config.logFilePath);
         const tailFile = new Tail(absolutePath, {
             buffer: config.memoryBufferInBytes || 63 * 1024 - 1,
-            sep: config.logSeparator || '\n',            
+            sep: config.logSeparator || '\n',
             lines: config.lineBuffer || 100,
             follow: config.follow || true,
             sleep: config.sleepIntervalInMilliSeconds || 500
         });
-        tailFile.on("line", (line) => {         
+        tailFile.on('line', (line) => {
             loggerService.log(line);
         });
         tailFile.on('error', console.error);
     };
 
-    flushLogs(){
-        if(loggerService instanceof LoggerService){
+    flushLogs() {
+        if (loggerService instanceof LoggerService) {
             loggerService.flushLogs();
         }
     }
 
     validateConfig(config) {
         if (!config || !config.sumoEndpoint || !config.logFilePath) {
-            throw new Error("Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath");
+            throw new Error('Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath');
         }
         return true;
     }
