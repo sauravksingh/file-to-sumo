@@ -39,7 +39,6 @@ class LogController {
         if (!config || !config.sumoEndpoint || !config.logFilePath) {
             throw new Error('Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath');
         }
-        return true;
     }
 }
 
