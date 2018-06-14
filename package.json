@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/sauravksingh/file-to-sumo#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "jscs": "^3.0.7",
+    "node.tail": "0.0.5",
+    "path": "^0.12.7",
+    "sumo-logger": "^1.5.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
