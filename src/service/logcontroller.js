@@ -1,4 +1,5 @@
-const path = require('path'),
+const fs = require('fs'),
+    path = require('path'),
     Tail = require('node.tail');
 
 const LoggerService = require('./loggerservice.js');
@@ -16,6 +17,9 @@ class LogController {
         this.validateConfig(config);
         loggerService = new LoggerService(config);
         const absolutePath = path.resolve(config.logFilePath);
+        if (!absolutePath || !fs.existsSync(absolutePath)) {
+            throw new Error('Given log file does not exists.');
+        }
         const tailFile = new Tail(absolutePath, {
             buffer: config.memoryBufferInBytes || 63 * 1024 - 1,
             sep: config.logSeparator || '\n',
