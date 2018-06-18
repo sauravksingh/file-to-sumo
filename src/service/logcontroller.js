@@ -14,11 +14,14 @@ class LogController {
     }
 
     streamLogs(config) {
-        this.validateConfig(config);
+        if (!this.validateConfig(config)) {
+            return;
+        }
         loggerService = new LoggerService(config);
         const absolutePath = path.resolve(config.logFilePath);
         if (!absolutePath || !fs.existsSync(absolutePath)) {
-            throw new Error('Given log file does not exists.');
+            console.error('Given log file does not exists. Exiting logger service...');
+            return;
         }
         const tailFile = new Tail(absolutePath, {
             buffer: config.memoryBufferInBytes || 63 * 1024 - 1,
@@ -41,8 +44,10 @@ class LogController {
 
     validateConfig(config) {
         if (!config || !config.sumoEndpoint || !config.logFilePath) {
-            throw new Error('Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath');
+            console.error('Invalid configuration: Missing required config parameters sumoEndpoint/logFilePath');
+            return false;
         }
+        return true;
     }
 }
 

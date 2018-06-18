@@ -28,7 +28,10 @@ class LoggerService {
         sumoLoggerOptions['onError'] = (err) => {
             const absolutePath = path.resolve(LOG_FAILURE_PATH);
             fs.writeFile(absolutePath, this.prepareErrorLog(err, opts), 'utf8', (err) => {
-                if (err) throw err;
+                if (err) {
+                    console.error('Error in updating log failures. Exiting...');
+                    return;
+                };
             });
         };
         return sumoLoggerOptions;
