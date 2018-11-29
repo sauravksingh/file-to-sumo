@@ -38,7 +38,7 @@ class LoggerService {
     }
 
     log(message) {
-        this.sumoLogger.log(message);
+        this.sumoLogger.log(JSON.parse(message));            
     };
 
     flushLogs() {
