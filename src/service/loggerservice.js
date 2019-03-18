@@ -1,9 +1,11 @@
 const fs = require('fs'),
     path = require('path'),
     SumoLogger = require('sumo-logger'),
+    util = require('util'),
     uuidv4 = require('uuid/v4');
 
 const LOG_FAILURE_PATH = './logfailures.log';
+
 
 class LoggerService {
     constructor(opts) {
@@ -37,8 +39,16 @@ class LoggerService {
         return sumoLoggerOptions;
     }
 
-    log(message) {
-        this.sumoLogger.log(JSON.parse(message));            
+    log(incomingMessage) {
+        //sanitize new lines 
+        let parsedMessage;
+        try {
+            parsedMessage = JSON.parse(incomingMessage.replace(/\n$/g, ''));
+        } catch (err) {
+            parsedMessage = incomingMessage;
+        }
+        
+        this.sumoLogger.log(parsedMessage);            
     };
 
     flushLogs() {
@@ -50,7 +60,7 @@ class LoggerService {
         log['timestamp'] = new Date().toISOString();
         log['error'] = err;
         log['endpoint'] = opts.sumoEndpoint;
-        return JSON.stringify(log) + '\r\n';
+        return util.inspect(log) + '\r\n';
     }
 }
 
